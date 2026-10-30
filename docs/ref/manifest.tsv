@@ -1,0 +1,34 @@
+# docs/ref/manifest.tsv: reference documents fetched by tools/fetch_ref_docs.sh
+# into docs/ref/vendor/ (git-ignored). Nothing listed here is committed.
+#
+# Columns (TAB-separated, 8 fields):
+#   id        unique key (used with --only)
+#   kind      pdf | docx | xlsx | csv | text   (checked against the file's magic bytes / not-HTML)
+#   dest      path under docs/ref/vendor/
+#   sha256    expected sha256, or "-" if none can be verified (live Google Docs, or
+#             mirror copies not yet checked against an official Parallax file).
+#             Only set it from an authoritative source (e.g. the pinned git commit).
+#   version   upstream version/date as stated by the source
+#   licence   short licence / redistribution note
+#   title     human-readable title
+#   urls      one or more URLs separated by single spaces, tried in order
+#
+# Parallax licence note: the Parallax PDFs say "copyright Parallax Inc. ...
+# duplication for educational use is permitted ... may not be duplicated for
+# commercial use". The Google Docs carry no explicit licence. Policy: fetch for
+# local reference only, never commit (decision, Phase 0).
+#
+p2-silicon-doc-txt	text	p2/p2-silicon-doc.txt	-	v35 2021-05-18 (Rev B/C), live Google Doc	Parallax copyright; no licence stated; do not commit	Propeller 2 Silicon Documentation (Chip Gracey), plain-text export	https://docs.google.com/document/d/1gn6oaT5Ib7CytvlZHacmrSbVBJsD9t_-kmvjd7nUR6o/export?format=txt
+p2-silicon-doc-pdf	pdf	p2/p2-silicon-doc.pdf	-	v35 2021-05-18 (Rev B/C), live Google Doc	Parallax copyright; no licence stated; do not commit	Propeller 2 Silicon Documentation (Chip Gracey), PDF export	https://docs.google.com/document/d/1gn6oaT5Ib7CytvlZHacmrSbVBJsD9t_-kmvjd7nUR6o/export?format=pdf
+p2-pasm2-instructions-csv	csv	p2/pasm2-instructions.csv	-	v35 Rev B/C, live Google Sheet (first tab)	Parallax copyright; no licence stated; do not commit	Propeller 2 PASM2 instruction list (encodings, clocks, flags), CSV of first tab	https://docs.google.com/spreadsheets/d/1_vJk-Ad569UMwgXTKTdfJkHYHpc1rZwxB-DcIiAZNdk/export?format=csv
+p2-pasm2-instructions-xlsx	xlsx	p2/pasm2-instructions.xlsx	-	v35 Rev B/C, live Google Sheet (all tabs)	Parallax copyright; no licence stated; do not commit	Propeller 2 PASM2 instruction list, XLSX with all tabs	https://docs.google.com/spreadsheets/d/1_vJk-Ad569UMwgXTKTdfJkHYHpc1rZwxB-DcIiAZNdk/export?format=xlsx
+p2-smartpins-supplement	docx	p2/smartpins-supplement.docx	-	"Smart Pins rev 5" (Drive file name, 2026-10-29)	Jon Titus / Parallax; no licence stated; do not commit	Propeller 2 Smart Pin Supplementary Documentation (Jon Titus)	https://drive.google.com/uc?export=download&id=1iTA4dwbntgaUVnpt0-9pDcFCVSsvCUnU
+p2-pasm2-manual	pdf	p2/pasm2-manual-20221101.pdf	-	2022-11-01 release	Parallax copyright; educational duplication only, no commercial; do not commit	Propeller 2 Assembly Language (PASM2) Manual	https://forums.parallax.com/discussion/download/147504/Propeller-2-Assembly-Language-PASM2-Manual-20221101.pdf
+p2-hardware-manual	pdf	p2/hardware-manual-20221101.pdf	-	Nov 1, 2022 release	Parallax copyright; educational duplication only, no commercial; do not commit	Propeller 2 P2X8C4M64P Hardware Manual (third-party mirror; official copy is on parallax.com Downloads)	https://docs.alexrp.com/propeller/propeller_2_arch.pdf
+p2-datasheet	pdf	p2/datasheet-20221101.pdf	-	Release November 1 2022	Parallax copyright; educational duplication only, no commercial; do not commit	Propeller 2 P2X8C4M64P Datasheet (distributor copies)	https://www.mouser.com/datasheet/3/328/1/Propeller2_P2X8C4M64P_Datasheet_20221101.pdf https://cdn.robotshop.com/media/P/Plx/RB-Plx-390/pdf/parallax-propeller-2-p2x8c4m64p-multicore-microcontroller-chip-datasheet.pdf
+p2-edge-product-guide	pdf	p2/p2-ec-product-guide.pdf	-	v1.0 2020-11-12 (distributor copy; Rev D guide on parallax.com may be newer)	Parallax copyright; do not commit	P2 Edge Module (#P2-EC) Product Guide (distributor copy)	https://www.mouser.com/datasheet/2/321/P2_EC_Edge_Module_REVD_Product_Guide_3_0-2526179.pdf https://elmicro.com/files/parallax/p2-ec-edge-module-product-guide.pdf
+p2-edge-schematic-reva	pdf	p2/p2-ec-schematic-rev-a.pdf	-	Rev A (current module is Rev D; Rev D schematic URL still to find)	Parallax copyright; do not commit	P2 Edge Module schematic Rev A (distributor copy)	https://elmicro.com/files/parallax/p2-ec-edge-module-schematic-rev-a.pdf
+flexc-c-md	text	flexspin/c.md	db6b0a7759c8d750e1dd72adb3ad9d1ec2dda122cfb83245ec781c7b41338f01	spin2cpp v7.7.3 @ eb2639617bf6cc25f55a34d8285af39d233adf81	MIT (spin2cpp COPYING)	FlexC language reference (doc/c.md)	https://raw.githubusercontent.com/totalspectrum/spin2cpp/eb2639617bf6cc25f55a34d8285af39d233adf81/doc/c.md
+flexspin-general-md	text	flexspin/general.md	0a16a44c5986d09e3902a7ab896e1748c567eb30f278b146cdc044c38db2b8db	spin2cpp v7.7.3 @ eb2639617bf6cc25f55a34d8285af39d233adf81	MIT (spin2cpp COPYING)	flexspin general docs: command line, memory model, inline asm (doc/general.md)	https://raw.githubusercontent.com/totalspectrum/spin2cpp/eb2639617bf6cc25f55a34d8285af39d233adf81/doc/general.md
+flexspin-pasm-code-md	text	flexspin/pasm_code.md	aa688ed939385054d0bdb9d67bb4c443e1b37771a3dd7357ee235acecb74313d	spin2cpp v7.7.3 @ eb2639617bf6cc25f55a34d8285af39d233adf81	MIT (spin2cpp COPYING)	flexspin generated-PASM notes (doc/pasm_code.md)	https://raw.githubusercontent.com/totalspectrum/spin2cpp/eb2639617bf6cc25f55a34d8285af39d233adf81/doc/pasm_code.md
+flexspin-licence	text	flexspin/COPYING	ced76df9b0f50ef2e2b9c891573020c237361b1b9c81bfc943c731e14b1629ba	spin2cpp v7.7.3 @ eb2639617bf6cc25f55a34d8285af39d233adf81	MIT (this is the licence text)	spin2cpp/flexspin licence	https://raw.githubusercontent.com/totalspectrum/spin2cpp/eb2639617bf6cc25f55a34d8285af39d233adf81/COPYING

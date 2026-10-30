@@ -1,0 +1,36 @@
+--- a/grbl/print.c
++++ b/grbl/print.c
+@@ -81,7 +81,7 @@
+ 
+ // Prints an uint8 variable in base 2 with desired number of desired digits.
+ void print_uint8_base2_ndigit(uint8_t n, uint8_t digits) {
+-  unsigned char buf[digits];
++  unsigned char buf[8];
+   uint8_t i = 0;
+ 
+   for (; i < digits; i++) {
+--- a/grbl/settings.c
++++ b/grbl/settings.c
+@@ -46,18 +46,10 @@
+              (DEFAULT_SOFT_LIMIT_ENABLE << BIT_SOFT_LIMIT_ENABLE) | \
+              (DEFAULT_INVERT_LIMIT_PINS << BIT_INVERT_LIMIT_PINS) | \
+              (DEFAULT_INVERT_PROBE_PIN << BIT_INVERT_PROBE_PIN),
+-    .steps_per_mm[X_AXIS] = DEFAULT_X_STEPS_PER_MM,
+-    .steps_per_mm[Y_AXIS] = DEFAULT_Y_STEPS_PER_MM,
+-    .steps_per_mm[Z_AXIS] = DEFAULT_Z_STEPS_PER_MM,
+-    .max_rate[X_AXIS] = DEFAULT_X_MAX_RATE,
+-    .max_rate[Y_AXIS] = DEFAULT_Y_MAX_RATE,
+-    .max_rate[Z_AXIS] = DEFAULT_Z_MAX_RATE,
+-    .acceleration[X_AXIS] = DEFAULT_X_ACCELERATION,
+-    .acceleration[Y_AXIS] = DEFAULT_Y_ACCELERATION,
+-    .acceleration[Z_AXIS] = DEFAULT_Z_ACCELERATION,
+-    .max_travel[X_AXIS] = (-DEFAULT_X_MAX_TRAVEL),
+-    .max_travel[Y_AXIS] = (-DEFAULT_Y_MAX_TRAVEL),
+-    .max_travel[Z_AXIS] = (-DEFAULT_Z_MAX_TRAVEL)};
++    .steps_per_mm = {DEFAULT_X_STEPS_PER_MM, DEFAULT_Y_STEPS_PER_MM, DEFAULT_Z_STEPS_PER_MM},
++    .max_rate = {DEFAULT_X_MAX_RATE, DEFAULT_Y_MAX_RATE, DEFAULT_Z_MAX_RATE},
++    .acceleration = {DEFAULT_X_ACCELERATION, DEFAULT_Y_ACCELERATION, DEFAULT_Z_ACCELERATION},
++    .max_travel = {(-DEFAULT_X_MAX_TRAVEL),(-DEFAULT_Y_MAX_TRAVEL),(-DEFAULT_Z_MAX_TRAVEL)}};
+ 
+ 
+ // Method to store startup lines into EEPROM

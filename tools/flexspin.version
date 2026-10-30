@@ -1,0 +1,11 @@
+# Pinned flexspin toolchain (sourced by tools/build_flexspin.sh and the CI cache key).
+# Change these three lines together, then re-run tools/build_flexspin.sh.
+#
+# v7.7.3 = latest *stable* (non-prerelease) spin2cpp release as of 2026-10-29,
+# published 2026-09-20 (https://github.com/totalspectrum/spin2cpp/releases/tag/v7.7.3).
+# SPIN2CPP_SHA is the commit the annotated tag points to (refs/tags/v7.7.3^{}),
+# read with `git ls-remote --tags https://github.com/totalspectrum/spin2cpp.git v7.7.3`.
+# (The tag object itself is 3f77d7eff1316ca12ee0c9e6727091447ae71629.)
+SPIN2CPP_REPO=https://github.com/totalspectrum/spin2cpp.git
+SPIN2CPP_TAG=v7.7.3
+SPIN2CPP_SHA=eb2639617bf6cc25f55a34d8285af39d233adf81

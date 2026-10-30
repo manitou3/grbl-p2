@@ -5,3 +5,13 @@
 *.d
 
 README.md
+
+# grbl-p2 Phase 0: local toolchain + P2 build outputs
+/build/p2/
+/tools/.flexspin/
+/tools/.cache/
+# reference docs fetched by tools/fetch_ref_docs.sh (never committed; see docs/ref/README.md)
+/docs/ref/vendor/
+# upstream ignores README.md everywhere; keep the Phase 0 ones tracked
+!/docs/ref/README.md
+!/p2/stub/README.md

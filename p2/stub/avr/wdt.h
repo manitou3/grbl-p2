@@ -1,0 +1,1 @@
+#define wdt_reset()

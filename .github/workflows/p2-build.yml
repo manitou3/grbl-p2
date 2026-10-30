@@ -1,0 +1,79 @@
+# Phase 0 CI: build the pinned flexspin toolchain, compile GRBL for the
+# Propeller 2, upload grbl_p2.binary and report its size.
+name: P2 build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: p2-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  p2-build:
+    name: grbl_p2.binary (flexspin)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read flexspin pin
+        id: pin
+        run: |
+          source tools/flexspin.version
+          echo "tag=$SPIN2CPP_TAG" >> "$GITHUB_OUTPUT"
+          echo "sha=$SPIN2CPP_SHA" >> "$GITHUB_OUTPUT"
+          echo "Pinned spin2cpp/flexspin: $SPIN2CPP_TAG ($SPIN2CPP_SHA)"
+
+      - name: Restore cached flexspin
+        id: cache-flexspin
+        uses: actions/cache@v4
+        with:
+          path: tools/.flexspin
+          key: flexspin-${{ runner.os }}-ubuntu-24.04-${{ steps.pin.outputs.sha }}-${{ hashFiles('tools/flexspin.version', 'tools/build_flexspin.sh') }}
+
+      - name: Install build prerequisites
+        if: steps.cache-flexspin.outputs.cache-hit != 'true'
+        run: |
+          if ! command -v bison >/dev/null || ! command -v make >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends bison make
+          fi
+          bison --version | head -1
+          make --version | head -1
+
+      - name: Build pinned flexspin
+        # No-op (stamp check) when the cache was restored.
+        run: tools/build_flexspin.sh
+
+      - name: Build grbl_p2.binary
+        run: tools/build_grbl_p2.sh
+
+      - name: Check binary exists
+        run: |
+          test -s build/p2/grbl_p2.binary || { echo "::error::build/p2/grbl_p2.binary is missing or empty"; exit 1; }
+          echo "::notice title=grbl_p2.binary size::$(wc -c < build/p2/grbl_p2.binary) bytes"
+
+      - name: Upload grbl_p2.binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: grbl_p2.binary
+          path: build/p2/grbl_p2.binary
+          if-no-files-found: error
+
+      - name: Upload build logs and size report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grbl_p2-build-logs
+          path: |
+            build/p2/flexspin.log
+            build/p2/size_report.txt
+            build/p2/size_report.json
+          if-no-files-found: warn
